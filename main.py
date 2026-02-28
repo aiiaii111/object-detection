@@ -237,12 +237,12 @@ def run_streamlit_app():
     if source_type == t["url"]:
         image_url = st.text_input(t["image_url"], value=DEFAULT_IMAGE_URL)
         if image_url:
-            st.image(image_url, caption=t["input_preview"], use_container_width=True)
+            st.image(image_url, caption=t["input_preview"], use_column_width=True)
     else:
         uploaded_file = st.file_uploader(t["upload_image"], type=["png", "jpg", "jpeg", "bmp", "webp"])
         if uploaded_file is not None:
             image_bytes = uploaded_file.getvalue()
-            st.image(Image.open(uploaded_file), caption=t["input_preview"], use_container_width=True)
+            st.image(Image.open(uploaded_file), caption=t["input_preview"], use_column_width=True)
             image_url = None
 
     if not run_button:
@@ -300,7 +300,7 @@ def run_streamlit_app():
             annotated_image = draw_object_boxes(source_image, result)
             annotated_image = draw_caption_text(annotated_image, result)
             if annotated_image is not None:
-                st.image(annotated_image, caption=t["objects_img"], use_container_width=True)
+                st.image(annotated_image, caption=t["objects_img"], use_column_width=True)
         except Exception as exc:  # noqa: BLE001
             st.warning(f"{t['bbox_preview_failed']}: {exc}")
         st.dataframe(object_rows, use_container_width=True)
